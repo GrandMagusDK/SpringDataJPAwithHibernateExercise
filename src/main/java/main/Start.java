@@ -54,5 +54,9 @@ public class Start {
 		{
 			file.delete();
 		}
+		
+		//cleanup log file
+		File file = new File("Log.log");
+		file.deleteOnExit();
  	}
 }
