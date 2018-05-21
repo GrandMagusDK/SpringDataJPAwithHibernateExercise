@@ -19,44 +19,43 @@ public class Start {
 	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-		
+
 		PieChartDataDAO pcdDAO = context.getBean(PieChartDataDAO.class);
 		RingChartDataDAO rcdDAO = context.getBean(RingChartDataDAO.class);
-		
+
 		cleanupPrevious(pcdDAO, rcdDAO);
-		
+
 		List<PieChartData> PCDSaveList = XLSParser.parseXLS();
 		List<RingChartData> RCDSaveList = CSVParser.parseCSV();
-		
+
 		pcdDAO.save(PCDSaveList);
 		rcdDAO.save(RCDSaveList);
 		pcdDAO.flush();
 		rcdDAO.flush();
-		
+
 		List<PieChartData> PCDList = pcdDAO.findAll();
 		List<RingChartData> RCDList = rcdDAO.findAll();
-		
-		PieChartGenerator PieChartGen = new PieChartGenerator("Pie Chart", PCDList);
-		RingChartGenerator RingChartGen = new RingChartGenerator("Ring Chart", RCDList);
-		
+
+		new PieChartGenerator("Pie Chart", PCDList);
+		new RingChartGenerator("Ring Chart", RCDList);
+
 		context.close();
 	}
-	
+
 	private static void cleanupPrevious(PieChartDataDAO pcdDAO, RingChartDataDAO rcdDAO) {
-		//cleanup DB
+		// cleanup DB
 		pcdDAO.deleteAllInBatch();
 		rcdDAO.deleteAllInBatch();
-		
-		//cleanup Images
-		File folder = new File("generatedImages/");
+
+		// cleanup Images and PDfs
+		File folder = new File("generatedFiles/");
 		List<File> listOfFiles = new ArrayList<>(Arrays.asList(folder.listFiles()));
-		for(File file : listOfFiles) 
-		{
+		for (File file : listOfFiles) {
 			file.delete();
 		}
-		
-		//cleanup log file
+
+		// cleanup log file
 		File file = new File("Log.log");
 		file.deleteOnExit();
- 	}
+	}
 }

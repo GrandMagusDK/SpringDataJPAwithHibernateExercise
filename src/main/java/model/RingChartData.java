@@ -8,23 +8,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="RingChartData")
+@Table(name = "RingChartData")
 
 public class RingChartData {
 
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="security")
+
+	@Column(name = "security")
 	String security;
-	
-	@Column(name="weight")
+
+	@Column(name = "weight")
 	double weight;
-	
-	public RingChartData() {}
-	
+
+	public RingChartData() {
+	}
+
 	public RingChartData(String security, double weight) {
 		this.security = security;
 		this.weight = weight;
@@ -53,9 +54,9 @@ public class RingChartData {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "[RingChartDataEntry] ID: " + id + ", Security: " + security + ", Weight: " + weight; 
+		return "[RingChartDataEntry] ID: " + id + ", Security: " + security + ", Weight: " + weight;
 	}
 }

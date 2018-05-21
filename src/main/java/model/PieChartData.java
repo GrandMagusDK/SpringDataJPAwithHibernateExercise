@@ -8,28 +8,29 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="PieChartData")
+@Table(name = "PieChartData")
 
 public class PieChartData {
 
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="country")
+
+	@Column(name = "country")
 	String country;
-	
-	@Column(name="weight")
+
+	@Column(name = "weight")
 	double weight;
-	
-	public PieChartData() {}
-	
+
+	public PieChartData() {
+	}
+
 	public PieChartData(String country, double weight) {
 		this.country = country;
 		this.weight = weight;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -53,9 +54,9 @@ public class PieChartData {
 	public void setWeight(double weight) {
 		this.weight = weight;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "[PieChartDataEntry] ID: " + id + ", Country: " + country + ", Weight: " + weight; 
+		return "[PieChartDataEntry] ID: " + id + ", Country: " + country + ", Weight: " + weight;
 	}
 }

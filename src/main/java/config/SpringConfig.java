@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages="dao", entityManagerFactoryRef="entityManagerFactory")
+@EnableJpaRepositories(basePackages = "dao", entityManagerFactoryRef = "entityManagerFactory")
 public class SpringConfig {
 
 	private Properties hibProperties() {
-		        Properties properties = new Properties();
-		        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
-		        //properties.put("hibernate.show_sql", "true");
-		        properties.put("hibernate.hbm2ddl.auto", "create-drop");
+		Properties properties = new Properties();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
+		// properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.hbm2ddl.auto", "create-drop");
 
-		        return properties;
-		    }
+		return properties;
+	}
 
 	@Bean
 	public DataSource dataSource() {
@@ -46,12 +46,12 @@ public class SpringConfig {
 
 		return entityManagerFactoryBean;
 	}
-	
+
 	@Bean
 	public JpaTransactionManager transactionManager() {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-	    return transactionManager;
+		return transactionManager;
 	}
 
 }

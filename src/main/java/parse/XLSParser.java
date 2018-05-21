@@ -18,25 +18,24 @@ import model.PieChartData;
 public class XLSParser {
 
 	private static Logger logger = LoggerFactory.getLogger("root");
-	
-	public static List<PieChartData> parseXLS(){
+
+	public static List<PieChartData> parseXLS() {
 		List<PieChartData> dataList = readXLS("dataFiles/piechart-data.xls");
 		return dataList;
 	}
-	
-	public static List<PieChartData> parseXLS(String filePath){
+
+	public static List<PieChartData> parseXLS(String filePath) {
 		List<PieChartData> dataList = readXLS(filePath);
 		return dataList;
 	}
-	
+
 	private static List<PieChartData> readXLS(String filePath) {
 		logger.debug("Start Parsing XLS File: " + filePath);
-		
+
 		List<PieChartData> dataList = new ArrayList<>();
-		
+
 		try {
-			FileInputStream file = new FileInputStream(
-					new File(filePath));
+			FileInputStream file = new FileInputStream(new File(filePath));
 
 			HSSFWorkbook workbook = new HSSFWorkbook(file);
 			HSSFSheet sheet = workbook.getSheetAt(0);
@@ -45,7 +44,7 @@ public class XLSParser {
 			while (rowIterator.hasNext()) {
 				String country = "";
 				double weight = 0;
-				
+
 				Row row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
 				while (cellIterator.hasNext()) {
@@ -61,8 +60,7 @@ public class XLSParser {
 						break;
 					}
 				}
-				if(weight > 0 && !country.isEmpty()) 
-				{
+				if (weight > 0 && !country.isEmpty()) {
 					dataList.add(new PieChartData(country, weight));
 				}
 			}
